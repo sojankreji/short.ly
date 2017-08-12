@@ -9,26 +9,30 @@ DEBUG = True
 
 ROOT_URLCONF = __name__
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            '/Users/delitamakanda/Projets/short.ly/templates/',
+        ],
+    },
+]
+
 def home(request):
     color = request.GET.get('color', 'red')
     return HttpResponse('<h1 style="color:' + color + '">Welcome to the Tinyapp\'s Homepage!</h1>')
 
+from django.template import engines
+from django.template.loader import render_to_string
+
 def about(request):
     title = 'App'
     author = 'Délita Makanda'
-    html = '''<!DOCTYPE html>
-    <html>
-    <head>
-      <title>''' + title + '''</title>
-    </head>
-    <body>
-        <h1>About ''' + title + '''</h1>
-        <p>This Website was developed by ''' + author + '''.</p>
-    </body>
-    </html>'''
+    html = render_to_string('about.html', {'title': title, 'author': author})
+
     return HttpResponse(html)
 
 urlpatterns = [
-    url(r'^$', home),
-    url(r'^about/$', about),
+    url(r'^$', home, name="homepage"),
+    url(r'^about/$', about, name="aboutpage"),
 ]
