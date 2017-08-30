@@ -2,7 +2,7 @@
 
 #### run project
 ```
-django-admin runserver --pythonpath=. --settings=app
+python manage.py runserver
 ```
 
 
