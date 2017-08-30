@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import home, about
+from app.views import liste, about, nouveau, redirection#, success_miniurl
+from django.contrib.sitemaps.views import sitemap
+
+from app.sitemap import (
+    MiniUrlSitemap
+)
+
+sitemaps = {
+    'urls': MiniUrlSitemap
+}
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home, name="homepage"),
+    url(r'^$', liste, name="liste"),
     url(r'^about/$', about, name="aboutpage"),
+    url(r'^new/$', nouveau, name='nouveau'),
+    url(r'^(?P<code>\w{6})/$', redirection, name='redirection'),
+    #url(r'^success/(?P<pk>\d+)/$', success_miniurl, name='success_miniurl'),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]

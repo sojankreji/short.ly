@@ -1,7 +1,52 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
+{{ max_count }} shorten urls | <a href="{% url 'nouveau' %}">Shorten an url</a>
+
+{% if minis %}
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th> Url </th>
+            <th> Shorten url </th>
+            <th> User </th>
+            <th> Date </th>
+            <th> Access </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for mini in minis %}
+        <tr>
+            <td>{{ mini.url }}</td>
+            <td>via <a href=" http://{{request.get_host}}{% url 'redirection' mini.code %}" target="_blank">{{ request.get_host }}{% url 'redirection' mini.code %}</a></td>
+            <td>{% if mini.pseudo %} by {{ mini.pseudo }} {% endif %}</td>
+            <td>{{ mini.date|date:"d M, Y" }}</td>
+            <td>({{ mini.nb_acces }} access )</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>{% trans "Pas d'url" %}</p>
+{% endif %}
+
+
+{% if minis.has_other_pages %}
+    <div>
+
+        {% if minis.has_next %}
+             <a href="?page={{ minis.next_page_number }}">next</a>
+         {% endif %}
+
+         {% if minis.has_previous %}
+              <a href="?page={{ minis.previous_page_number }}">previous</a>
+          {% endif %}
+    </div>
+{% endif %}
+
+
 
 {% endblock %}
