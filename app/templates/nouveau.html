@@ -1,19 +1,17 @@
 {% extends 'base.html'%}
 {% load i18n %}
+
 {% block title %} New Url {% endblock %}
 {% block content %}
-<div class="ui container ">
-    <div class="ui vertical segment">
-        <div class="ui tall ">
 
-        <p>Shorten an url | <a href="{% url 'liste' %}">Back to urls</a></p>
+<p><a href="{% url 'liste' %}">Back to urls</a></p>
 
-    <form method="post" action="{% url 'nouveau' %}" class="ui form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="ui button">Post an url</button>
-    </form>
-</div>
-</div>
-</div>
+<form method="post" action="{% url 'nouveau' %}" class="mui-form">
+    <legend>{{ title }}</legend>
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="mui-btn mui-btn--raised">Post an url</button>
+</form>
+
 {% endblock %}

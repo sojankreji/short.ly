@@ -1,17 +1,60 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %} {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Shorten your urls">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="//cdn.muicss.com/mui-0.9.24/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.24/js/mui.min.js"></script>
+    <link href="{% static 'styles/app.css' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+    <header class="mui-appbar mui--z1" id="appbar">
+        <div class="mui-container">
+            <table width="100%">
+                <tr class="mui--appbar-height">
+                    <td class="mui--text-title">short.ly</td>
+                    <td align="right">
+                        <div class="mui-dropdown">
+                            <button class="mui-btn mui-btn--fab mui-btn--accent" data-mui-toggle="dropdown">
+                              +
+                            </button>
+                          <ul class="mui-dropdown__menu mui-dropdown__menu--right" style="top: 31px;">
+                            <li><a href="{% url 'aboutpage'%}">About</a></li>
+                          </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
 
-{% block content %}{% endblock %}
+    <div id="content-wrapper" class="mui-container mui--text-center">
+        <div class="mui--appbar-height"></div>
+
+        <br><br>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="mui-container mui--text-center">
+            Copyright (c) 2017 Copyright Short.ly All Rights Reserved. | Made with ♥ by <a href="https://www.muicss.com">MUICSS</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/vendors/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static 'scripts/app.js' %}"></script>
 </body>
 </html>

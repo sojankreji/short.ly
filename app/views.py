@@ -9,7 +9,7 @@ from django.contrib import messages
 
 # Create your views here.
 def about(request):
-    title = 'App'
+    title = 'Short.ly app'
     author = 'Délita Makanda'
 
     return render(request, 'about.html', {'title': title, 'author': author})
@@ -21,7 +21,7 @@ def liste(request):
     max_count = minis_list.count()
     title = 'Short.ly'
 
-    paginator = Paginator(minis_list, 10)
+    paginator = Paginator(minis_list, 5)
     try:
         minis = paginator.page(page)
     except PageNotAnInteger:
@@ -38,6 +38,7 @@ def liste(request):
 
 
 def nouveau(request):
+    title = 'Shorten an url'
     if request.method == 'POST':
         form = MiniUrlForm(request.POST)
         if form.is_valid():
@@ -48,7 +49,7 @@ def nouveau(request):
             return redirect('liste')
     else:
         form = MiniUrlForm()
-    return render(request, 'nouveau.html', {'form' : form})
+    return render(request, 'nouveau.html', {'form' : form, 'title': title })
 
 def redirection(request, code):
     mini = get_object_or_404(MiniUrl, code=code)

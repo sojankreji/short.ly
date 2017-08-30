@@ -4,10 +4,15 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-{{ max_count }} shorten urls | <a href="{% url 'nouveau' %}">Shorten an url</a>
+
+<a href="{% url 'nouveau' %}" class="mui-btn mui-btn--raised">Shorten an url</a>
+
+<br><br>
+
+<div class="mui--text-left">{{ max_count }} shorten urls</div>
 
 {% if minis %}
-<table class="ui striped table">
+<table class="mui-table mui-table--bordered ">
     <thead>
         <tr>
             <th> Url </th>
