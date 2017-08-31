@@ -10,7 +10,7 @@ from django.contrib import messages
 # Create your views here.
 def about(request):
     title = 'Short.ly app'
-    author = 'Délita Makanda'
+    author = 'Delita Makanda'
 
     return render(request, 'about.html', {'title': title, 'author': author})
 
